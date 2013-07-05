@@ -183,6 +183,13 @@
       var options = jsOptions(series, opts), data, i, j;
       options.xAxis.type = "datetime";
       options.chart = {type: "spline", renderTo: element.id};
+      options.plotOptions = {
+          series: {
+            animation: false,
+            shadow: false,
+            enableMouseTracking: false
+          }
+      }
 
       for (i = 0; i < series.length; i++) {
         data = series[i].data;
