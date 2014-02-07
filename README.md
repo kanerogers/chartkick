@@ -6,7 +6,7 @@ Create beautiful Javascript charts with one line of Ruby. No more fighting with 
 
 Works with Rails, Sinatra and most browsers (including IE 6)
 
-:two_hearts: A perfect companion to [groupdate](http://ankane.github.io/groupdate/)
+:two_hearts: A perfect companion to [groupdate](https://github.com/ankane/groupdate) and [active_median](https://github.com/ankane/active_median)
 
 ## Usage
 
@@ -26,6 +26,18 @@ Column chart
 
 ```erb
 <%= column_chart Task.group_by_hour_of_day(:created_at).count %>
+```
+
+Bar chart
+
+```erb
+<%= bar_chart Shirt.group("size").sum(:price) %>
+```
+
+Area chart
+
+```erb
+<%= area_chart Visit.group_by_minute(:created_at).maximum(:load_time) %>
 ```
 
 Multiple series (except pie chart)
@@ -61,25 +73,25 @@ end
 Id and height
 
 ```erb
-<%= line_chart User.group_by_day(:created_at).count, :id => "users-chart", :height => "500px" %>
+<%= line_chart data, :id => "users-chart", :height => "500px" %>
 ```
 
 Min and max values (except pie chart)
 
 ```erb
-<%= line_chart User.group_by_day(:created_at).count, :min => 1000, :max => 5000 %>
+<%= line_chart data, :min => 1000, :max => 5000 %>
 ```
 
 You can pass options directly to the charting library with:
 
 ```erb
-<%= line_chart User.group_by_day(:created_at).count, :library => {:backgroundColor => "#eee"} %>
+<%= line_chart data, :library => {:backgroundColor => "#eee"} %>
 ```
 
 You can also pass a content_for option, which will put the javascript in a content block.  This is great for including all of your javascript at the bottom of the page.
 
 ```erb
-<%= line_chart User.group_by_day(:created_at).count, :content_for => :js_initialization %>
+<%= line_chart data, :content_for => :js_initialization %>
 ```
 Then, in your layout:
 
@@ -161,6 +173,18 @@ In addition, you must specify `http` or `https` if you use Google Charts, since 
 <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
 ```
 
+### Localization
+
+To specify a language for Google Charts, add:
+
+```html
+<script>
+  var Chartkick = {"language": "de"};
+</script>
+```
+
+**before** the javascript files.
+
 ## No Ruby? No Problem
 
 Check out [chartkick.js](https://github.com/ankane/chartkick.js)
@@ -177,8 +201,9 @@ Chartkick follows [Semantic Versioning](http://semver.org/)
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Everyone is encouraged to help improve this project. Here are a few ways you can help:
+
+- [Report bugs](https://github.com/ankane/chartkick/issues)
+- Fix bugs and [submit pull requests](https://github.com/ankane/chartkick/pulls)
+- Write, clarify, or fix documentation
+- Suggest or add new features

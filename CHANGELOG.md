@@ -1,3 +1,12 @@
+## 1.2.1
+
+- Added localization for Google Charts
+
+## 1.2.0
+
+- Added bar chart and area chart
+- Resize Google Charts on window resize
+
 ## 1.1.3
 
 - Added content_for option
